@@ -1,1 +1,1 @@
-# odin-library
+# Odin Library
