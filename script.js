@@ -107,17 +107,25 @@ function handleForm(event){
     const author = document.querySelector(".author");
     const pages = document.querySelector(".pages");
     const read = document.querySelector(".read");
-    addBookToLibrary(title.value, author.value, pages.value, read.checked);
-    displayLibrary()
-    const dialog = document.querySelector("dialog");
-    dialog.removeAttribute("open");
-    title.value = "";
-    author.value = "";
-    pages.value = "";
-    read.checked = false;
+    if (pages.validity.rangeUnderflow) {
+        alert("There must be at least 1 page!");
+    }
+    else if (pages.validity.rangeoverflow) {
+        alert("There must less than 1000000000 pages!");
+    }
+    else{
+        addBookToLibrary(title.value, author.value, pages.value, read.checked);
+        displayLibrary()
+        const dialog = document.querySelector("dialog");
+        dialog.removeAttribute("open");
+        title.value = "";
+        author.value = "";
+        pages.value = "";
+        read.checked = false;
+    }
 }
 
-var form = document.querySelector("form");
+let form = document.querySelector("form");
 form.addEventListener('submit', handleForm);
 
 const addButton = document.querySelector(".new");
